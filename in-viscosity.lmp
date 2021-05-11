@@ -1,0 +1,52 @@
+# created by fftool
+
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+
+special_bonds lj/coul 0.0 0.0 0.5
+
+pair_style hybrid lj/cut/coul/long 12.0 12.0
+pair_modify tail yes
+kspace_style pppm 1.0e-5
+
+read_data data-out.lmp
+
+include pair-sc-97.lmp
+
+timestep 1.0
+
+variable TK equal 300.0
+variable PBAR equal 1.0
+
+velocity all create ${TK} 12345
+
+variable A equal 0.02e-5 # angstrom/fs^2
+fix            cos all accelerate/cos ${A}
+compute        cos all viscosity/cos
+
+variable       density equal density
+variable       lz equal lz
+
+variable       vMax equal c_cos[7] # velocity of atoms at z=0
+variable       invVis equal v_vMax/${A}/v_density*39.4784/v_lz/v_lz*100 # reciprocal of viscosity 1/Pa/s
+
+fix npt all npt temp ${TK} ${TK} 100 iso ${PBAR} ${PBAR} 1000
+
+fix_modify npt temp cos 
+
+thermo_style custom step temp press vol density f_npt[1] f_npt[2] f_npt[3] v_vMax v_invVis
+thermo_modify temp cos 
+
+dump TRAJ all custom 1000 dump.lammpstrj id mol type element q xu yu zu
+dump_modify TRAJ element N C C C H C H H C C H C Cl H O
+
+restart 10000 restart1.lmp restart2.lmp
+
+run 15000
+
+write_data data-visc-97-2.lmp
