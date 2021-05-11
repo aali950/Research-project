@@ -9,7 +9,9 @@ This is an example LAMMPS input script used for CPE 440 Research project.
   
   This repository can be used to reproduce results from my simulations if desired
    
-  Need to download LAMMPS, Packmol and fftool to use
+  LAMMPS, Packmol and fftool are required to reproduce scripts. 
+  
+  For full tutorials on how to produce these files refer to https://github.com/paduagroup/clandpol
   
 Thank you,
 Amir 
