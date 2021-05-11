@@ -1,0 +1,19 @@
+# created by fftool
+tolerance 2.5
+filetype xyz
+output simbox.xyz
+
+structure c4c1im_pack.xyz
+  number 90
+  inside box 1.5000 1.5000 1.5000 73.5000 73.5000 73.5000
+end structure
+
+structure cl_pack.xyz
+  number 90
+  inside box 1.5000 1.5000 1.5000 73.5000 73.5000 73.5000
+end structure
+
+structure spce_pack.xyz
+  number 2910
+  inside box 1.5000 1.5000 1.5000 73.5000 73.5000 73.5000
+end structure
