@@ -14,9 +14,9 @@ pair_style hybrid lj/cut/coul/long 12.0 12.0
 pair_modify tail yes
 kspace_style pppm 1.0e-5
 
-read_data data-out.lmp
+read_data data-out-75.lmp
 
-include pair-sc-97.lmp
+include pair-sc-75.lmp
 
 timestep 1.0
 
@@ -49,4 +49,4 @@ restart 10000 restart1.lmp restart2.lmp
 
 run 15000
 
-write_data data-visc-97-2.lmp
+write_data data-visc-75.lmp
